@@ -1,1 +1,1 @@
-A MineCraft surver manager.
+A MineCraft server manager.
