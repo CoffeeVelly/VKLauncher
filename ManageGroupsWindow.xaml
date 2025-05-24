@@ -1,0 +1,69 @@
+<Window x:Class="VKLauncher.ManageGroupsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="服务组管理" Height="400" Width="700">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 服务组列表 -->
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="服务组列表：" FontWeight="Bold"/>
+            <ListBox x:Name="GroupListBox" Height="200" SelectionChanged="GroupListBox_SelectionChanged"/>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Button Content="添加组" Click="AddGroup_Click" Margin="0,0,5,0"/>
+                <Button Content="删除组" Click="DeleteGroup_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- 服务组编辑 -->
+        <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="组名：" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBox x:Name="GroupNameBox" Margin="5,0" Width="200"/>
+            </StackPanel>
+
+            <!-- 服务双栏选择 -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 未选择服务 -->
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="可选服务" FontWeight="Bold"/>
+                    <ListBox x:Name="AvailableListBox" Height="200" SelectionMode="Extended"/>
+                </StackPanel>
+
+                <!-- 中间按钮 -->
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
+                    <Button Content="→" Width="40" Click="MoveRight_Click" Margin="0,5"/>
+                    <Button Content="←" Width="40" Click="MoveLeft_Click"/>
+                </StackPanel>
+
+                <!-- 已选择服务 -->
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="已选服务" FontWeight="Bold"/>
+                    <ListBox x:Name="SelectedListBox" Height="200" SelectionMode="Extended"/>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5">
+                <Button Content="保存" Click="SaveGroup_Click" Margin="0,0,5,0"/>
+                <Button Content="保存并关闭" Click="SaveAndClose_Click" Margin="0,0,5,0"/>
+                <Button Content="关闭" Click="Close_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

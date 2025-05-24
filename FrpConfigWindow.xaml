@@ -1,0 +1,109 @@
+<Window x:Class="VKLauncher.FrpConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FRP 配置" Height="500" Width="500"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical" Margin="10" >
+
+                <TextBlock Text="FRP 配置工具" FontSize="20" FontWeight="Bold" Margin="0 0 0 20"/>
+
+                <!-- 路径配置 -->
+                <GroupBox Header="执行文件路径" Margin="0 0 0 10">
+                    <StackPanel Margin="10">
+                        <DockPanel Margin="0 5">
+                            <TextBlock Text="frpc.exe：" Width="60" VerticalAlignment="Center"/>
+                            <TextBox x:Name="FrpcPathBox" Width="260"/>
+                            <Button Content="浏览" Margin="5,0,0,0" Click="BrowseFrpc_Click"/>
+                        </DockPanel>
+                        <DockPanel Margin="0 5">
+                            <TextBlock Text="frps.exe：" Width="60" VerticalAlignment="Center"/>
+                            <TextBox x:Name="FrpsPathBox" Width="260"/>
+                            <Button Content="浏览" Margin="5,0,0,0" Click="BrowseFrps_Click"/>
+                        </DockPanel>
+                        <TextBlock Margin="0 10 0 0">
+                            <Hyperlink NavigateUri="https://github.com/fatedier/frp/releases/tag/v0.62.1"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                点击前往 FRP GitHub 下载页
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="选择本地toml配置文件" Margin="0 0 0 10">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="如果不选择，将使用默认配置生成文件并保存在程序目录。" TextWrapping="Wrap" Foreground="Gray" Margin="0 0 0 10"/>
+
+                        <!-- frpc.toml -->
+                        <DockPanel Margin="0 5">
+                            <TextBlock Text="frpc.toml：" Width="60" VerticalAlignment="Center"/>
+                            <TextBox x:Name="FrpcTomlPathBox" Width="260" IsReadOnly="True"/>
+                            <Button Content="选择" Margin="5,0,0,0" Click="SelectFrpcToml_Click"/>
+                        </DockPanel>
+
+                        <!-- frps.toml -->
+                        <DockPanel Margin="0 5">
+                            <TextBlock Text="frps.toml：" Width="60" VerticalAlignment="Center"/>
+                            <TextBox x:Name="FrpsTomlPathBox" Width="260" IsReadOnly="True"/>
+                            <Button Content="选择" Margin="5,0,0,0" Click="SelectFrpsToml_Click"/>
+                        </DockPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- frpc 配置 -->
+                <TextBlock Text="建议在上方选择已经编写好的toml文件" Margin="0 0 0 20"/>
+                <TextBlock Text="如果你不需要太多设置，下方的基础配置也许能帮助你完成。" Margin="0 0 0 20"/>
+
+                <GroupBox Header="frpc.toml 基础配置" Margin="0 0 0 10">
+                    <StackPanel Margin="10">
+                        <Label Content="serverAddr：" />
+                        <TextBox x:Name="ServerAddrBox"/>
+                        <TextBlock Text="* 必填项" Foreground="DarkRed" FontSize="10" Margin="0 0 0 10"/>
+
+                        <Label Content="serverPort：" />
+                        <TextBox x:Name="ServerPortBox" Text="7000" Margin="0 0 0 10"/>
+
+                        <Label Content="name：" />
+                        <TextBox x:Name="NameBox" Text="minecraft"/>
+                        <TextBlock Text="* 不能重复，必须唯一" Foreground="DarkRed" FontSize="10" Margin="0 0 0 10"/>
+
+                        <Label Content="type：" />
+                        <TextBox x:Name="TypeBox" Text="tcp" Margin="0 0 0 10"/>
+
+                        <Label Content="localIP：" />
+                        <TextBox x:Name="LocalIPBox" Text="127.0.0.1" Margin="0 0 0 10"/>
+
+                        <Label Content="localPort：" />
+                        <TextBox x:Name="LocalPortBox" Text="25565" Margin="0 0 0 10"/>
+
+                        <Label Content="remotePort：" />
+                        <TextBox x:Name="RemotePortBox" Text="25565"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- frps 配置 -->
+                <GroupBox Header="frps.toml 基础配置" Margin="0 0 0 10">
+                    <StackPanel Margin="10">
+                        <Label Content="bindPort：" />
+                        <TextBox x:Name="BindPortBox" Text="7000" Margin="0 0 0 10"/>
+
+                        <Label Content="vhostHTTPSPort：" />
+                        <TextBox x:Name="VhostHTTPSPortBox" Text="443" Margin="0 0 0 10"/>
+                    </StackPanel>
+                </GroupBox>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 底部按钮 -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="保存配置" Width="120" Click="SaveConfig_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
