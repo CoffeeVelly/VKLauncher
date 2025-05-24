@@ -1,0 +1,77 @@
+﻿<Window x:Class="VKLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:VKLauncher"
+        xmlns:models="clr-namespace:VKLauncher.Models"
+        Title="VKLauncher - 多服务 Minecraft 启动器" Height="600" Width="900">
+
+    <Window.Resources>
+        <models:BoolToStatusConverter x:Key="BoolToStatusConverter"/>
+        <models:BoolToColorConverter x:Key="BoolToColorConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="服务列表" FontWeight="Bold" Margin="0,0,0,5"/>
+            
+            <ListBox x:Name="ServiceListBox"
+                    ItemsSource="{Binding Services}"
+                    SelectedItem="{Binding SelectedService}"
+                    SelectionChanged="ServiceListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" Width="120"/>
+                            <TextBlock Text="{Binding IsRunning, Converter={StaticResource BoolToStatusConverter}}" 
+                                    Foreground="{Binding IsRunning, Converter={StaticResource BoolToColorConverter}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="添加" Width="60" Click="AddService_Click"/>
+                <Button Content="删除" Width="60" Margin="10,0,0,0" Click="DeleteService_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+
+        <!-- 服务详情 -->
+        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+            <TextBlock Text="服务配置" FontWeight="Bold" Margin="0,0,0,10"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="名称：" Width="60"/>
+                <TextBox x:Name="NameBox" Width="300"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="Java路径：" Width="60"/>
+                <TextBox x:Name="JavaBox" Width="300"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="Jar路径：" Width="60"/>
+                <TextBox x:Name="JarBox" Width="300"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="工作目录：" Width="60"/>
+                <TextBox x:Name="WorkDirBox" Width="300"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <CheckBox x:Name="AutoStartBox" Content="自动启动" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                <Button Content="保存配置" Width="100" Click="SaveConfig_Click"/>
+                <Button Content="启动服务" Width="100" Margin="10,0,0,0" Click="StartServer_Click"/>
+                <Button Content="停止服务" Width="100" Margin="10,0,0,0" Click="StopServer_Click"/>
+            </StackPanel>
+
+            <TextBox x:Name="ConsoleOutput" Height="250" TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

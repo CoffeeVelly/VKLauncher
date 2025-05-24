@@ -1,0 +1,104 @@
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Bb]uild[Ll]og.*
+*.log
+*.tlog
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# DotCover
+.idea/.dotCover
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Microsoft Azure Web Apps
+.scm/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS for Mac
+.vscode/
+.vscode-test/
+.vscode-insiders/
+MonoDevelop/
+.vsconfig
+
+# .NET Core
+project.lock.json
+project.assets.json
+*.csproj.user
+*.dbmdl
+*.jfm
+*.cache
+*.pdb
+*.mdb
+
+# Entity Framework
+Migrations/
+
+# Rider generated files
+.idea/
+
+# JetBrains Rider
+*.DotSettings.user
+
+# Logs
+*.log
+
+# Local test results
+TestResults/
+*.vspscc
+*.vssscc
+
+# Others
+*.sqlite
+*.db
+*.bak
+
+# Environment files
+.env
+.env.*
+secrets.json
+appsettings.*.json
+
+# Local launchSettings (optional)
+Properties/launchSettings.json
+
+# Publish
+publish/
+*.publishsettings
+
+# Git folder conflict artifacts
+*.orig
+
+Config
