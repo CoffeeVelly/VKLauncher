@@ -89,6 +89,7 @@
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <CheckBox x:Name="AutoStartBox" Content="自动启动" />
                 <CheckBox x:Name="UseFrpBox" Content="启用 FRP" Margin="10 0 0 0"/>
+                <TextBlock Text="更改任意部分后请点击保存配置！" Width="200" Margin="10 0 0 0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
