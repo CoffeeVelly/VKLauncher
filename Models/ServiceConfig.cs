@@ -27,6 +27,7 @@ namespace VKLauncher.Models
             if (UseFrp)
             {
                 StartFrpc();
+                MessageBox.Show($"{Name} 的FRP已启动！");
             }
         }
 
@@ -70,6 +71,7 @@ namespace VKLauncher.Models
             {
                 StopProcessByName("frpc");
                 StopProcessByName("frps");
+                MessageBox.Show($"{Name} 的FRP已停止！");
             }
 
             // 你还可以在这里添加停止 MC 服务的逻辑（如 Java 进程终止）

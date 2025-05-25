@@ -250,17 +250,6 @@ namespace VKLauncher
                 return;
             }
 
-            // 如果启用了 FRP
-            try
-            {
-                service.Start(); // 这将自动启动 frpc 或 frps，并启动 Minecraft 服务
-                MessageBox.Show($"{service.Name} 的FRP已启动！");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("启动失败：" + ex.Message);
-            }
-
             var proc = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -307,6 +296,17 @@ namespace VKLauncher
             {
                 MessageBox.Show($"启动服务 [{service.Name}] 失败: " + ex.Message);
             }
+
+            Thread.Sleep(5000);
+            // 如果启用了 FRP
+            try
+            {
+                service.Start(); // 这将自动启动 frpc 或 frps，并启动 Minecraft 服务
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("启动失败：" + ex.Message);
+            }
         }
 
         private void StopServer_Click(object sender, RoutedEventArgs e)
@@ -344,7 +344,6 @@ namespace VKLauncher
                 try
                 {
                     service.Stop();
-                    MessageBox.Show($"{service.Name} 的FRP已停止！");
                 }
                 catch (Exception ex)
                 {
