@@ -67,23 +67,23 @@
                         <TextBlock Text="* 必填项" Foreground="DarkRed" FontSize="10" Margin="0 0 0 10"/>
 
                         <Label Content="serverPort：" />
-                        <TextBox x:Name="ServerPortBox" Text="7000" Margin="0 0 0 10"/>
+                        <TextBox x:Name="ServerPortBox" Margin="0 0 0 10"/>
 
                         <Label Content="name：" />
-                        <TextBox x:Name="NameBox" Text="minecraft"/>
+                        <TextBox x:Name="NameBox"/>
                         <TextBlock Text="* 不能重复，必须唯一" Foreground="DarkRed" FontSize="10" Margin="0 0 0 10"/>
 
                         <Label Content="type：" />
-                        <TextBox x:Name="TypeBox" Text="tcp" Margin="0 0 0 10"/>
+                        <TextBox x:Name="TypeBox" Margin="0 0 0 10"/>
 
                         <Label Content="localIP：" />
-                        <TextBox x:Name="LocalIPBox" Text="127.0.0.1" Margin="0 0 0 10"/>
+                        <TextBox x:Name="LocalIPBox" Margin="0 0 0 10"/>
 
                         <Label Content="localPort：" />
-                        <TextBox x:Name="LocalPortBox" Text="25565" Margin="0 0 0 10"/>
+                        <TextBox x:Name="LocalPortBox" Margin="0 0 0 10"/>
 
                         <Label Content="remotePort：" />
-                        <TextBox x:Name="RemotePortBox" Text="25565"/>
+                        <TextBox x:Name="RemotePortBox"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -91,10 +91,10 @@
                 <GroupBox Header="frps.toml 基础配置" Margin="0 0 0 10">
                     <StackPanel Margin="10">
                         <Label Content="bindPort：" />
-                        <TextBox x:Name="BindPortBox" Text="7000" Margin="0 0 0 10"/>
+                        <TextBox x:Name="BindPortBox" Margin="0 0 0 10"/>
 
                         <Label Content="vhostHTTPSPort：" />
-                        <TextBox x:Name="VhostHTTPSPortBox" Text="443" Margin="0 0 0 10"/>
+                        <TextBox x:Name="VhostHTTPSPortBox" Margin="0 0 0 10"/>
                     </StackPanel>
                 </GroupBox>
 

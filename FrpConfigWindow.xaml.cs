@@ -67,49 +67,60 @@ namespace VKLauncher
 
         private void SaveConfig_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(FrpcTomlPathBox.Text)){
+            // 如果没有选择 frpc.toml，本地基础配置必须填写
+            if (string.IsNullOrWhiteSpace(FrpcTomlPathBox.Text))
+            {
                 if (string.IsNullOrWhiteSpace(ServerAddrBox.Text) ||
                     string.IsNullOrWhiteSpace(ServerPortBox.Text) ||
-                    string.IsNullOrWhiteSpace(NameBox.Text))
+                    string.IsNullOrWhiteSpace(NameBox.Text)||
+                    string.IsNullOrWhiteSpace(TypeBox.Text) ||
+                    string.IsNullOrWhiteSpace(LocalIPBox.Text) ||
+                    string.IsNullOrWhiteSpace(LocalPortBox.Text) ||
+                    string.IsNullOrWhiteSpace(RemotePortBox.Text) ||
+                    string.IsNullOrWhiteSpace(BindPortBox.Text) ||
+                    string.IsNullOrWhiteSpace(VhostHTTPSPortBox.Text)
+                    )
                 {
-                    MessageBox.Show("未选择本地toml配置文件，请填写基础配置的所有必要字段！");
+                    MessageBox.Show("未选择 frpc.toml 文件，请填写 frpc 的基础配置中所有必填项！");
                     return;
                 }
             }
 
-
-            string frpcContent = $"""
-            serverAddr = "{ServerAddrBox.Text}"
-            serverPort = {ServerPortBox.Text}
-
-            [[proxies]]
-            name = "{NameBox.Text}"
-            type = "{TypeBox.Text}"
-            localIP = "{LocalIPBox.Text}"
-            localPort = {LocalPortBox.Text}
-            remotePort = {RemotePortBox.Text}
-            """;
-
-            string frpsContent = $"""
-            bindPort = {BindPortBox.Text}
-            vhostHTTPSPort = {VhostHTTPSPortBox.Text}
-            """;
-
             try
             {
-                string frpcPath = string.IsNullOrWhiteSpace(FrpcTomlPathBox.Text)
-                    ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "frpc.toml")
-                    : FrpcTomlPathBox.Text;
+                // 如果没有选择本地 frpc.toml，生成并写入
+                if (string.IsNullOrWhiteSpace(FrpcTomlPathBox.Text))
+                {
+                    string frpcContent = $"""
+                    serverAddr = "{ServerAddrBox.Text}"
+                    serverPort = {ServerPortBox.Text}
 
-                string frpsPath = string.IsNullOrWhiteSpace(FrpsTomlPathBox.Text)
-                    ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "frps.toml")
-                    : FrpsTomlPathBox.Text;
+                    [[proxies]]
+                    name = "{NameBox.Text}"
+                    type = "{TypeBox.Text}"
+                    localIP = "{LocalIPBox.Text}"
+                    localPort = {LocalPortBox.Text}
+                    remotePort = {RemotePortBox.Text}
+                    """;
 
-                File.WriteAllText(frpcPath, frpcContent);
-                File.WriteAllText(frpsPath, frpsContent);
+                    string frpcPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "frpc.toml");
+                    File.WriteAllText(frpcPath, frpcContent);
+                }
+
+                // 如果没有选择本地 frps.toml，生成并写入
+                if (string.IsNullOrWhiteSpace(FrpsTomlPathBox.Text))
+                {
+                    string frpsContent = $"""
+                    bindPort = {BindPortBox.Text}
+                    vhostHTTPSPort = {VhostHTTPSPortBox.Text}
+                    """;
+
+                    string frpsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "frps.toml");
+                    File.WriteAllText(frpsPath, frpsContent);
+                }
 
                 IsConfigSaved = true;
-                DialogResult = true; // 重要！
+                DialogResult = true;
                 Close();
 
                 MessageBox.Show("配置文件保存成功！");
@@ -119,6 +130,7 @@ namespace VKLauncher
                 MessageBox.Show("保存失败：" + ex.Message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
 
     }
