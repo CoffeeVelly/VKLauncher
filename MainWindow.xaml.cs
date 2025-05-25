@@ -26,6 +26,8 @@ namespace VKLauncher
             LoadServices();
             LoadServiceGroups();
             GroupComboBox.ItemsSource = serviceGroups;
+
+            StartAutoServices();
         }
 
         private void LoadServices()
@@ -87,6 +89,7 @@ namespace VKLauncher
         {
             var newService = new McService { Name = "新服务" };
             services.Add(newService);
+            SaveServices();
             LoadServices();
             ServiceListBox.SelectedItem = newService;
         }
@@ -96,6 +99,7 @@ namespace VKLauncher
             if (currentService != null)
             {
                 services.Remove(currentService);
+                SaveServices();
                 currentService = null;
                 LoadServices();
                 ClearFields();
@@ -196,6 +200,20 @@ namespace VKLauncher
             AutoStartBox.IsChecked = false;
             ConsoleOutput.Clear();
         }
+
+        private void StartAutoServices()
+        {
+            foreach (var service in services)
+            {
+                if (service.AutoStart && !runningProcesses.ContainsKey(service.Name))
+                {
+                    StartService(service);
+                }
+            }
+
+            ConsoleOutput.AppendText($"[{DateTime.Now:T}] 自动启动已勾选自启动的服务\n");
+        }
+
 
         private void StartServer_Click(object sender, RoutedEventArgs e)
         {
@@ -371,6 +389,11 @@ namespace VKLauncher
 
         private void ConfigureFrp_Click(object sender, RoutedEventArgs e)
         {
+            if (currentService == null)
+            {
+                MessageBox.Show("请先选择一个服务！");
+                return;
+            }
             var configWindow = new FrpConfigWindow();
 
 

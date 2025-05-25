@@ -67,13 +67,16 @@ namespace VKLauncher
 
         private void SaveConfig_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(ServerAddrBox.Text) ||
-                string.IsNullOrWhiteSpace(ServerPortBox.Text) ||
-                string.IsNullOrWhiteSpace(NameBox.Text))
-            {
-                MessageBox.Show("请填写所有必要字段！");
-                return;
+            if(string.IsNullOrWhiteSpace(FrpcTomlPathBox.Text)){
+                if (string.IsNullOrWhiteSpace(ServerAddrBox.Text) ||
+                    string.IsNullOrWhiteSpace(ServerPortBox.Text) ||
+                    string.IsNullOrWhiteSpace(NameBox.Text))
+                {
+                    MessageBox.Show("未选择本地toml配置文件，请填写基础配置的所有必要字段！");
+                    return;
+                }
             }
+
 
             string frpcContent = $"""
             serverAddr = "{ServerAddrBox.Text}"
